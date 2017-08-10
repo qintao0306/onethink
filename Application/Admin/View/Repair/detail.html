@@ -1,0 +1,57 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>
+            {$info['id']?'编辑':'新增'}导航
+            <notempty name="pid">
+                [&nbsp;父导航：<a href="{:U('index','pid='.$pid)}">{$parent.title}</a>&nbsp;]
+            </notempty>
+        </h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal">
+        <input type="hidden" name="pid" value="{$pid}">
+        <div class="form-item">
+            <label class="item-label">姓名<span class="check-tips">（用于显示的文字）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="name" value="{$info.title|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">电话<span class="check-tips">（你的手机号码）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="tel" value="{$info.title|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">地址<span class="check-tips">（例如：6栋2单元501）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="address" value="{$info.address|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">标题<span class="check-tips">（）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="title" value="{$info.title}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">详细情况<span class="check-tips">（报修内容）</span></label>
+            <div class="controls">
+                <label class="textarea input-large">
+                    <textarea name="content">{$info.content}</textarea>
+                </label>
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$info.id|default=''}">
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //导航高亮
+        highlight_subnav('{:U('index')}');
+    </script>
+</block>
