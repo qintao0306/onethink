@@ -105,8 +105,8 @@
                 <th>报修人</th>
                 <th>电话</th>
                 <th>地址</th>
-                <th>报修时间</th>
                 <th>报修问题</th>
+                <th>报修时间</th>
                 <th>状态</th>
                 <th>操作</th>
             </tr>
@@ -120,17 +120,23 @@
                         <td><?php echo ($repair["tel"]); ?></td>
                         <td><?php echo ($repair["address"]); ?></td>
                         <td><?php echo ($repair["title"]); ?></td>
-                        <td><?php echo (date("Y-m-d H:i:s",$time)); ?></td>
-                        <td><?php echo ($status_all[1]); ?></td>
+                        <td><?php echo (date("Y-m-d H:i:s",$repair["time"])); ?></td>
+                        <td><?php echo ($status_all[$repair['status']]); ?></td>
                         <td>
+                            <?php if(($repair["status"]) == "2"): ?><a href="<?php echo U('Repair/changeStatus?method=forbid&id='.$repair['id']);?>" class="ajax-get">立即处理</a>
+                                <?php else: ?>
+                                <a href="<?php echo U('Repair/changeStatus?method=resume&id='.$repair['id']);?>" class="ajax-get">已完成</a><?php endif; ?>
                             <a title="查看详细" href="<?php echo U('detail?id='.$repair['id']);?>">查看详细</a>
-                            <a class="confirm ajax-get" title="删除" href="<?php echo U('del?id='.$repair['id']);?>">删除</a>
+                            <a class="confirm ajax-get" title="删除" href="<?php echo U('Repair/changeStatus?method=delete&id='.$repair['id']);?>">删除</a>
                         </td>
                     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                 <?php else: ?>
                 <td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
             </tbody>
         </table>
+    </div>
+    <div class="page">
+        <?php echo ($page); ?>
     </div>
 
         </div>

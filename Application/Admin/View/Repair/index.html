@@ -21,8 +21,8 @@
                 <th>报修人</th>
                 <th>电话</th>
                 <th>地址</th>
-                <th>报修时间</th>
                 <th>报修问题</th>
+                <th>报修时间</th>
                 <th>状态</th>
                 <th>操作</th>
             </tr>
@@ -38,11 +38,16 @@
                         <td>{$repair.tel}</td>
                         <td>{$repair.address}</td>
                         <td>{$repair.title}</td>
-                        <td><?php echo (date("Y-m-d H:i:s",$time)); ?></td>
-                        <td>{$status_all[1]}</td>
+                        <td>{$repair.time|date="Y-m-d H:i:s",###}</td>
+                        <td>{$status_all[$repair['status']]}</td>
                         <td>
+                            <eq name="repair.status" value="2">
+                                <a href="{:U('Repair/changeStatus?method=forbid&id='.$repair['id'])}" class="ajax-get">立即处理</a>
+                                <else/>
+                                <a href="{:U('Repair/changeStatus?method=resume&id='.$repair['id'])}" class="ajax-get">已完成</a>
+                            </eq>
                             <a title="查看详细" href="{:U('detail?id='.$repair['id'])}">查看详细</a>
-                            <a class="confirm ajax-get" title="删除" href="{:U('del?id='.$repair['id'])}">删除</a>
+                            <a class="confirm ajax-get" title="删除" href="{:U('Repair/changeStatus?method=delete&id='.$repair['id'])}">删除</a>
                         </td>
                     </tr>
                 </volist>
@@ -51,6 +56,9 @@
             </notempty>
             </tbody>
         </table>
+    </div>
+    <div class="page">
+        {$page}
     </div>
 </block>
 

@@ -91,7 +91,6 @@
         </h2>
     </div>
     <form action="<?php echo U();?>" method="post" class="form-horizontal">
-        <input type="hidden" name="pid" value="<?php echo ($pid); ?>">
         <div class="form-item">
             <label class="item-label">姓名<span class="check-tips">（用于显示的文字）</span></label>
             <div class="controls">

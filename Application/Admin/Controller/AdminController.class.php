@@ -202,6 +202,10 @@ class AdminController extends Controller {
         $this->editRow(   $model , $data, $where, $msg);
     }
 
+
+
+
+
     /**
      * 设置一条或者多条数据的状态
      */
@@ -223,6 +227,9 @@ class AdminController extends Controller {
                 break;
             case 1  :
                 $this->resume($Model, $map, array('success'=>'启用成功','error'=>'启用失败'));
+                break;
+            case 2  :
+                $this->resume($Model, $map, array('success'=>'处理完成','error'=>'处理失败'));
                 break;
             default :
                 $this->error('参数错误');
